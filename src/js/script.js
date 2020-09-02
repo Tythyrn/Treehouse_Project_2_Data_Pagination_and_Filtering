@@ -120,13 +120,14 @@ function newPage(button, list) {
 
 /*
 This function will will return the matched students based on a user's input into a search bar
+Can search first name, last name, email, and joined date
 */
 function searchResults(searchInput, list) {
    const noResults = studentList.previousElementSibling;
    let matchedStudents = [];
 
    for(let i = 0; i < list.length; i++) {   
-     if( list[i]['name']['first'].toLowerCase().includes(searchInput.toLowerCase())) {
+     if(list[i]['name']['first'].toLowerCase().includes(searchInput.toLowerCase()) || list[i]['name']['last'].toLowerCase().includes(searchInput.toLowerCase()) || list[i]['email'].toLowerCase().includes(searchInput.toLowerCase()) || list[i]['registered']['date'].toLowerCase().includes(searchInput.toLowerCase())) {
        matchedStudents.push(list[i]);
      } 
    }
@@ -140,6 +141,7 @@ function searchResults(searchInput, list) {
    return matchedStudents;
  }
 
+ //This event occurs on click and checks for matching students based on search criteria and displays them on the page
 header.addEventListener('click', (e) => {
    if(e.target.tagName === 'BUTTON') {
       const input = e.target.previousElementSibling.value;
@@ -150,6 +152,7 @@ header.addEventListener('click', (e) => {
    }
 });
 
+//This event occurs on keyup and checks for matching students based on search criteria and displays them on the page
 header.addEventListener('keyup', (e) => {
    if(e.target.tagName === 'INPUT') {
       const input = e.target.value;
